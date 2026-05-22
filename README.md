@@ -41,16 +41,23 @@
 | 平坦区（<2°） | 17.2% |
 | 陡坡区（>25°） | 36.5% |
 
+## 预览
+
+| DEM + 山体阴影 | 坡度图 |
+|:---:|:---:|
+| ![overview](screenshots/overview.png) | ![detail](screenshots/detail.png) |
+
 ## 项目结构
 
 ```
-├── 原始数据/              ← 杭州市边界 GeoJSON、原始 DEM 瓦片
-├── 处理中/                ← dem_filled.tif（填洼中间结果）
-├── 成果数据/              ← 8 个栅格产品 + terrain_summary.json
+├── screenshots/           ← 成果预览图（2 张关键图）
+├── scripts/               ← 全部 Python 脚本（01-07）
+├── 原始数据/              ← 杭州市边界 GeoJSON（含 EPSG:4326 / EPSG:4527）
 ├── 成果展示/              ← 6 张 150dpi PNG 专题图
+├── 成果数据/              ← terrain_summary.json（统计摘要）
 ├── 分析报告/              ← DEM地形分析报告.xlsx（4 个 Sheet）
-├── raster_data/           ← GeoServer 用栅格副本（不含中文路径）
-└── scripts/               ← 全部 Python 脚本（01-07）
+├── requirements.txt       ← Python 依赖
+└── README.md
 ```
 
 ## 技术栈
@@ -65,7 +72,7 @@
 
 ```bash
 # 1. 安装依赖
-pip install rasterio geopandas numpy matplotlib openpyxl requests psycopg2-binary
+pip install -r requirements.txt
 
 # 2. 配置环境变量（PostGIS + GeoServer 密码）
 export PGPASSWORD=your_db_password
