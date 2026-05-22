@@ -1,0 +1,34 @@
+# === 大文件不传（栅格数据） ===
+*.tif
+*.tiff
+*.aux.xml
+
+# raster_data 是给 GeoServer 用的副本，不传
+raster_data/
+
+# === 保留的成果文件 ===
+# 成果展示/*.png 保留（专题图）
+# 分析报告/*.xlsx 保留（Excel 报告）
+# 成果数据/*.json 保留（统计摘要）
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# === 临时文件 ===
+*.tmp
+*.lock
+.DS_Store
+
+# === IDE ===
+.vscode/
+.idea/
+
+# === 压缩包 ===
+*.zip
+*.7z
+*.rar
