@@ -16,7 +16,7 @@
 | 04 | `scripts/04_地形分级.py` | 高程 6 级、坡度 6 级、TPI 7 级分类（地貌图/水土保持规范） |
 | 05 | `scripts/05_入库.py` | raster2pgsql 栅格入库 + geopandas 矢量入库 → PostGIS |
 | 06 | `scripts/06_服务发布.py` | GeoServer REST API 自动发布 WMS/WCS/WFS |
-| 07 | `scripts/07_出图报告.py` | 6 张专题地图 + Excel 统计报告 + JSON 摘要 |
+| 07 | `scripts/07_出图报告.py` | 7 张专题地图 + Excel 统计报告 + JSON 摘要 |
 
 ## 核心算法
 
@@ -43,14 +43,14 @@
 
 ## 预览
 
-| DEM + 山体阴影 | 坡度图 |
-|:---:|:---:|
-| ![overview](screenshots/overview.png) | ![detail](screenshots/detail.png) |
+| DEM + 山体阴影 | 坡度图 | 等高线 |
+|:---:|:---:|:---:|
+| ![overview](screenshots/overview.png) | ![detail](screenshots/detail.png) | ![contours](screenshots/contours.png) |
 
 ## 项目结构
 
 ```
-├── screenshots/           ← 成果预览图（2 张）
+├── screenshots/           ← 成果预览图（3 张）
 ├── scripts/               ← 全部 Python 脚本（01-07）
 ├── 原始数据/              ← 杭州市边界 GeoJSON
 ├── 成果数据/              ← terrain_summary.json（统计摘要）
@@ -95,7 +95,7 @@ python 07_出图报告.py
 
 ## 成果展示
 
-专题图由 `scripts/07_出图报告.py` 生成，输出到 `成果展示/`（本地运行后可见，不提交 Git）。仓库 `screenshots/` 中包含 2 张预览：
+专题图由 `scripts/07_出图报告.py` 生成，输出到 `成果展示/`（本地运行后可见，不提交 Git）。仓库 `screenshots/` 中包含 3 张预览：
 
 | 图 | 说明 |
 |------|------|
@@ -105,6 +105,7 @@ python 07_出图报告.py
 | `04_tri.png` | 地形起伏度 TRI |
 | `05_elevation_zones.png` | 高程分级（6 级） |
 | `06_slope_zones.png` | 坡度分级（6 级） |
+| `07_contours.png` | 等高线（50m 间距）+ 山体阴影底图 |
 
 ## 服务端点
 

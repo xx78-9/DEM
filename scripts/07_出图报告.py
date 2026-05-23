@@ -83,7 +83,7 @@ def make_map(data, extent, title, out_path, cmap='terrain',
 # ============================================================
 # 1a. 高程 + 山体阴影叠加图
 # ============================================================
-print('  [1/6] 高程渲染 + 山体阴影...')
+print('  [1/7] 高程渲染 + 山体阴影...')
 dem, dem_extent = read_raster(os.path.join(BASE_DIR, '处理中', 'dem_filled.tif'))
 hs, _ = read_raster(os.path.join(RESULT, 'hillshade.tif'))
 
@@ -105,7 +105,7 @@ plt.close(fig)
 # ============================================================
 # 1b. 坡度图
 # ============================================================
-print('  [2/6] 坡度...')
+print('  [2/7] 坡度...')
 slope, extent = read_raster(os.path.join(RESULT, 'slope.tif'))
 slope_plot = np.where(slope > -9000, slope, np.nan)
 make_map(slope_plot, extent, 'Slope',
@@ -116,7 +116,7 @@ make_map(slope_plot, extent, 'Slope',
 # ============================================================
 # 1c. 坡向图
 # ============================================================
-print('  [3/6] 坡向...')
+print('  [3/7] 坡向...')
 aspect, extent = read_raster(os.path.join(RESULT, 'aspect.tif'))
 aspect_plot = np.where(aspect >= 0, aspect, np.nan)
 make_map(aspect_plot, extent, 'Aspect',
@@ -126,7 +126,7 @@ make_map(aspect_plot, extent, 'Aspect',
 # ============================================================
 # 1d. 地形起伏度
 # ============================================================
-print('  [4/6] 地形起伏度...')
+print('  [4/7] 地形起伏度...')
 tri, extent = read_raster(os.path.join(RESULT, 'tri.tif'))
 tri_plot = np.where(tri > -9000, tri, np.nan)
 make_map(tri_plot, extent, 'Terrain Ruggedness Index (TRI)',
@@ -137,7 +137,7 @@ make_map(tri_plot, extent, 'Terrain Ruggedness Index (TRI)',
 # ============================================================
 # 1e. 高程分级
 # ============================================================
-print('  [5/6] 高程分级...')
+print('  [5/7] 高程分级...')
 elev_z, extent = read_raster(os.path.join(RESULT, 'elevation_zones.tif'))
 zone_colors = ['#f7fcf5', '#e5f5e0', '#a1dab4', '#41b6c4', '#2c7fb8', '#253494']
 zone_labels = ['0-50m', '50-100m', '100-200m', '200-500m', '500-1000m', '>1000m']
@@ -160,7 +160,7 @@ plt.close(fig)
 # ============================================================
 # 1f. 坡度分级
 # ============================================================
-print('  [6/6] 坡度分级...')
+print('  [6/7] 坡度分级...')
 slope_z, extent = read_raster(os.path.join(RESULT, 'slope_zones.tif'))
 s_colors = ['#f7fcf5', '#c7e9c0', '#78c679', '#238443', '#feb24c', '#bd0026']
 s_labels = ['0-2', '2-5', '5-15', '15-25', '25-45', '>45']
@@ -180,9 +180,27 @@ fig.tight_layout()
 fig.savefig(os.path.join(DISPLAY, '06_slope_zones.png'), dpi=150)
 plt.close(fig)
 
+# ============================================================
+# 1g. 等高线图 (山体阴影底图 + 等高线叠加)
+# ============================================================
+print('  [7/7] 等高线...')
+contours = gpd.read_file(os.path.join(RESULT, 'contours_50m.shp'))
+
+fig, ax = plt.subplots(figsize=(14, 11), dpi=150)
+ax.imshow(hs_plot, cmap='gray', extent=dem_extent)
+contours.plot(ax=ax, column='elev', cmap='plasma', linewidth=0.3, legend=True,
+              legend_kwds={'shrink': 0.7, 'label': 'Elevation (m)'})
+boundary.boundary.plot(ax=ax, color='white', linewidth=0.8, aspect=None)
+ax.set_title('Contours (50m interval) + Hillshade', fontsize=15)
+ax.set_xlabel('CGCS2000 Easting (m)')
+ax.set_ylabel('CGCS2000 Northing (m)')
+fig.tight_layout()
+fig.savefig(os.path.join(DISPLAY, '07_contours.png'), dpi=150)
+plt.close(fig)
+
 sizes = [os.path.getsize(os.path.join(DISPLAY, f)) / 1024
          for f in os.listdir(DISPLAY) if f.endswith('.png')]
-print(f'  6 张图生成完成 ({sum(sizes):.0f} KB)')
+print(f'  7 张图生成完成 ({sum(sizes):.0f} KB)')
 
 # ============================================================
 # 2. Excel 报告
