@@ -26,7 +26,7 @@ RAW = os.path.join(BASE_DIR, '原始数据')
 CACHE = os.path.join(RAW, '_cache')
 os.makedirs(CACHE, exist_ok=True)
 
-# Copernicus DEM 瓦片 (1x1 tile): 杭州覆盖 4 片
+# Copernicus DEM 瓦片 (1x1 tile): 杭州覆盖 6 片
 DEM_TILES = [
     'Copernicus_DSM_COG_10_N29_00_E118_00_DEM',
     'Copernicus_DSM_COG_10_N29_00_E119_00_DEM',

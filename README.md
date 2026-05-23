@@ -50,10 +50,9 @@
 ## 项目结构
 
 ```
-├── screenshots/           ← 成果预览图（2 张关键图）
+├── screenshots/           ← 成果预览图（2 张）
 ├── scripts/               ← 全部 Python 脚本（01-07）
-├── 原始数据/              ← 杭州市边界 GeoJSON（含 EPSG:4326 / EPSG:4527）
-├── 成果展示/              ← 6 张 150dpi PNG 专题图
+├── 原始数据/              ← 杭州市边界 GeoJSON
 ├── 成果数据/              ← terrain_summary.json（统计摘要）
 ├── 分析报告/              ← DEM地形分析报告.xlsx（4 个 Sheet）
 ├── requirements.txt       ← Python 依赖
@@ -96,14 +95,16 @@ python 07_出图报告.py
 
 ## 成果展示
 
-打开 `成果展示/` 查看专题图：
+专题图由 `scripts/07_出图报告.py` 生成，输出到 `成果展示/`（本地运行后可见，不提交 Git）。仓库 `screenshots/` 中包含 2 张预览：
 
-1. `01_dem_hillshade.png` — 高程渲染 + 山体阴影叠加
-2. `02_slope.png` — 坡度图
-3. `03_aspect.png` — 坡向图
-4. `04_tri.png` — 地形起伏度 (TRI)
-5. `05_elevation_zones.png` — 高程分级图（6 级）
-6. `06_slope_zones.png` — 坡度分级图（6 级）
+| 图 | 说明 |
+|------|------|
+| `01_dem_hillshade.png` | 高程渲染 + 山体阴影叠加 |
+| `02_slope.png` | 坡度图 |
+| `03_aspect.png` | 坡向图 |
+| `04_tri.png` | 地形起伏度 TRI |
+| `05_elevation_zones.png` | 高程分级（6 级） |
+| `06_slope_zones.png` | 坡度分级（6 级） |
 
 ## 服务端点
 
@@ -115,7 +116,7 @@ WFS: http://localhost:8080/geoserver/hangzhou_terrain/wfs
 
 ## 演示亮点
 
-1. 打开 `成果展示/01_dem_hillshade.png` → 展示 DEM + Hillshade 叠加效果
+1. 打开 `screenshots/overview.png` → 展示 DEM + Hillshade 叠加效果
 2. 打开 `分析报告/DEM地形分析报告.xlsx` → 4 个 Sheet：项目概览、统计摘要、地形分级、方法说明
 3. 浏览 `scripts/03_地形分析.py` → 讲解 Horn 算法 / TRI / TPI 的地学意义
 4. 运行 `python scripts/06_服务发布.py` → 演示 REST API 一键发布 10 个图层到 GeoServer

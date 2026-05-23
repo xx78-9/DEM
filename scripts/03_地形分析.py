@@ -133,7 +133,7 @@ try:
     field = ogr.FieldDefn('elev', ogr.OFTInteger)
     layer.CreateField(field)
 
-    gdal.ContourGenerate(band, 50, 0, [], 0, 0, layer, 0, 1)
+    gdal.ContourGenerate(band, 50, 0, [], 0, 0, layer, -1, 0)
     ds_out = None
     dem_ds = None
 

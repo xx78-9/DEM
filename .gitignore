@@ -3,6 +3,18 @@
 *.tiff
 *.aux.xml
 
+# 成果数据中的大文件（跑脚本重新生成即可）
+成果数据/*.shp
+成果数据/*.shx
+成果数据/*.dbf
+成果数据/*.prj
+成果数据/*.cpg
+成果数据/*.qix
+成果数据/*.fix
+
+# === 成果展示 PNG 不传（用 screenshots/ 预览即可） ===
+成果展示/
+
 # raster_data 是给 GeoServer 用的副本，不传
 raster_data/
 
